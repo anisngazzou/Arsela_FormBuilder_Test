@@ -1,27 +1,31 @@
-import logo from './logo.svg';
 import './App.css';
-import Form from "./Components/Form";
-
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch
+} from 'react-router-dom';
+import Form from './Components/FormComponents/Form';
+import Login from './Components/Login/Login';
+import UserView from './Components/UserResponseComponents/UserView';
+import Home from "./Components/Home";
+import PrivateRoute from "./Components/Utils/PrivateRoute"
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          <Form />
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    
+    <div >
+        <Router>
+            <Switch>
+               
+                <PrivateRoute exact path="/" component={Home}/> 
+                <Route exact path="/login" component={Login}/>
+                <Route exact path="/s/:formId" component={UserView} />
+                <PrivateRoute path="/form/:formId" component={Form}/> 
+                
+            </Switch>
+        </Router>
     </div>
   );
 }
+ 
 
 export default App;

@@ -44,7 +44,21 @@ module.exports = {
                            accessToken
                        });
                     })
-                } 
+                } else {        
+                    var user = { 
+                        id: result._id, 
+                        name: result.name,  
+                        email: result.email,
+                        image: result.image
+                      }
+                     // console.log(user);
+                      
+                    const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '24h'});
+                   // console.log(accessToken);
+                    res.status(200).json({
+                        accessToken
+                    });   
+            }  
                   
            
         } catch (error) {
